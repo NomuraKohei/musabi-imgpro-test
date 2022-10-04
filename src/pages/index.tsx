@@ -1,10 +1,70 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
+import React, { useCallback, useState } from 'react'
+import { data as data2 } from '../data/jsonFile_4d2'
+import { data as data3 } from '../data/jsonFile_4d3'
 import styles from '../styles/Home.module.css'
-import Three from './three'
+import Three, { ThreeProps } from '@/components/Three'
 
 const Home: NextPage = () => {
+  const inputArray: ThreeProps[] = [
+    {
+      pixels: data2,
+      setting: {
+        position: {
+          x: {
+            multiply: 128,
+            offset: -1.5,
+          },
+          y: {
+            multiply: -128,
+            offset: 1.3,
+          },
+          z: {
+            multiply: 128,
+            offset: -0.8,
+          },
+        },
+      },
+    },
+    {
+      pixels: data3,
+      setting: {
+        position: {
+          x: {
+            multiply: 128,
+            offset: -1,
+          },
+          y: {
+            multiply: -128,
+            offset: 2.5,
+          },
+          z: {
+            multiply: 128,
+            offset: -1,
+          },
+        },
+      },
+    },
+  ]
+
+  const [currentSceneIndex, setCurrentSceneIndex] = useState(0)
+  const [currentScene, setCurrentScene] = useState<ThreeProps>(inputArray[0])
+
+  const onClickHandler = useCallback(() => {
+    console.log(currentSceneIndex)
+    if (currentSceneIndex === 1) {
+      setCurrentScene(inputArray[0])
+      setCurrentSceneIndex(0)
+      return
+    }
+    if (currentSceneIndex === 0) {
+      setCurrentScene(inputArray[1])
+      setCurrentSceneIndex(1)
+      return
+    }
+  }, [currentSceneIndex, setCurrentScene, setCurrentSceneIndex, inputArray])
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,12 +73,11 @@ const Home: NextPage = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className={styles.main}>
-        <Three
-          pixels={[
-            { position: { x: 0.1, y: 0.1, z: 0 }, color: { r: 255, g: 255, b: 0 } },
-            { position: { x: 0.2, y: 0.1, z: 0 }, color: { r: 255, g: 255, b: 0 } },
-          ]}
-        />
+        {/* <Three gltfPath={currentSceneIndex === 0 ? 'scene-meshopt' : 'scene2-meshopt'} /> */}
+        <Three pixels={currentScene.pixels} setting={currentScene.setting} />
+        <button style={{ position: 'fixed', top: 0, right: 0 }} onClick={onClickHandler}>
+          切り替え
+        </button>
       </main>
     </div>
   )

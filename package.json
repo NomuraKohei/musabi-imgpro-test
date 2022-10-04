@@ -8,12 +8,20 @@
     "start": "next start",
     "lint": "next lint --dir src",
     "lint:fix": "yarn lint --fix",
-    "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json}'"
+    "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json}'",
+    "draco": "node compress-draco.js",
+    "meshopt": "node compress-meshopt.js"
   },
   "dependencies": {
+    "@react-three/drei": "^9.32.4",
     "@react-three/fiber": "^8.8.3",
     "@types/three": "^0.144.0",
+    "fs-extra": "^10.1.0",
+    "glob": "^8.0.3",
+    "gltf-pipeline": "^3.0.5",
+    "gltfpack": "^0.18.0",
     "next": "12.3.1",
+    "path": "^0.12.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "three": "^0.144.0"

@@ -2,3 +2,11 @@
   height: 100vh;
   width: 100vw;
 }
+
+.whole:active {
+  cursor: grabbing;
+}
+
+.whole {
+  cursor: grab;
+}

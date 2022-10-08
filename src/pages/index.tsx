@@ -1,67 +1,63 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import React, { useCallback, useState } from 'react'
-import { data as data2 } from '../data/jsonFile_4d2'
-import { data as data3 } from '../data/jsonFile_4d3'
+// import { data as data2 } from '../data/jsonFile_4d2'
+// import { data as data3 } from '../data/jsonFile_4d3'
 import styles from '../styles/Home.module.css'
 import Three, { ThreeProps } from '@/components/Three'
 
 const Home: NextPage = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const inputArray: ThreeProps[] = [
-    {
-      pixels: data2,
-      setting: {
-        position: {
-          x: {
-            multiply: 128,
-            offset: -1.5,
-          },
-          y: {
-            multiply: -128,
-            offset: 1.3,
-          },
-          z: {
-            multiply: 128,
-            offset: -0.8,
-          },
-        },
-      },
-    },
-    {
-      pixels: data3,
-      setting: {
-        position: {
-          x: {
-            multiply: 128,
-            offset: -1,
-          },
-          y: {
-            multiply: -128,
-            offset: 2.5,
-          },
-          z: {
-            multiply: 128,
-            offset: -1,
-          },
-        },
-      },
-    },
-  ]
+  // const inputArray: ThreeProps[] = [
+  //   {
+  //     pixels: data2,
+  //     setting: {
+  //       position: {
+  //         x: {
+  //           multiply: 128,
+  //           offset: -1.5,
+  //         },
+  //         y: {
+  //           multiply: -128,
+  //           offset: 1.3,
+  //         },
+  //         z: {
+  //           multiply: 128,
+  //           offset: -0.8,
+  //         },
+  //       },
+  //     },
+  //   },
+  //   {
+  //     pixels: data3,
+  //     setting: {
+  //       position: {
+  //         x: {
+  //           multiply: 128,
+  //           offset: -1,
+  //         },
+  //         y: {
+  //           multiply: -128,
+  //           offset: 1.7,
+  //         },
+  //         z: {
+  //           multiply: 128,
+  //           offset: -1,
+  //         },
+  //       },
+  //     },
+  //   },
+  // ]
 
   const [currentSceneIndex, setCurrentSceneIndex] = useState(0)
-
-  // const [currentScene, setCurrentScene] = useState<ThreeProps>(inputArray[0])
 
   const onClickHandler = useCallback(() => {
     console.log(currentSceneIndex)
     if (currentSceneIndex === 1) {
-      // setCurrentScene(inputArray[0])
       setCurrentSceneIndex(0)
       return
     }
     if (currentSceneIndex === 0) {
-      // setCurrentScene(inputArray[1])
       setCurrentSceneIndex(1)
       return
     }
@@ -75,18 +71,30 @@ const Home: NextPage = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className={styles.main}>
-        {currentSceneIndex === 0 && (
-          <Three pixels={inputArray[0].pixels} setting={inputArray[0].setting} initialScene />
-        )}
-        {currentSceneIndex === 1 && (
-          <Three pixels={inputArray[1].pixels} setting={inputArray[1].setting} />
-        )}
-        <button
+        {/* {currentSceneIndex === 0 && (
+          // <Three
+          //   pixels={inputArray[0].pixels}
+          //   setting={inputArray[0].setting}
+          //   gltfPath='scene1-meshopt'
+          // />
+          <Three gltfPath={'scene1-meshopt'} />
+        )} */}
+        <Three gltfPath={'scene2-meshopt'} />
+        {/* {currentSceneIndex === 1 && (
+          // <Three
+          //   pixels={inputArray[1].pixels}
+          //   setting={inputArray[1].setting}
+          //   gltfPath='scene2-meshopt'
+          // />
+          <Three gltfPath='scene2-meshopt' />
+        )} */}
+        <a
           style={{ position: 'fixed', top: 40, right: 40, cursor: 'pointer' }}
           onClick={onClickHandler}
+          href='/model2'
         >
           シーン切り替え
-        </button>
+        </a>
       </main>
     </div>
   )

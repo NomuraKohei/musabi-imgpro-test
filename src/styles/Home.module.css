@@ -1,6 +1,7 @@
 .main {
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
 }
 
 .whole:active {
@@ -9,4 +10,8 @@
 
 .whole {
   cursor: grab;
+}
+
+.link:hover {
+  text-decoration: underline;
 }
